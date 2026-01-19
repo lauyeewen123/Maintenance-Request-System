@@ -1,1 +1,92 @@
-/* Enter your custom styles here */
+/* Global Styling */
+.homePageBackground, 
+.homePageBackground .sapMPageBg, 
+.homePageBackground section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+    background-attachment: fixed !important;
+}
+
+
+/* Typography */
+.heroTitle {
+    font-size: 2.5rem !important;
+    font-weight: 300 !important;
+    color: #32363a;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.subTitle {
+    font-size: 1.1rem !important;
+    color: #5d6875 !important;
+    font-weight: 400;
+}
+
+/* Customized Cards/Tiles */
+.fancyCard {
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.fancyCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Add a colored accent bar to the top of cards */
+.accentTopBorder {
+    border-top: 4px solid #0a6ed1 !important;
+}
+
+.accentTopBorderCritical {
+    border-top: 4px solid #d97d00 !important;
+}
+
+.accentTopBorderSuccess {
+    border-top: 4px solid #107e3e !important;
+}
+
+/* Button enhancements */
+.scanButton .sapMBtnInner {
+    border-radius: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+}
+
+/* Status Indication Logic for Text */
+.statusPending {
+    color: #d97d00 !important;
+    font-weight: 700;
+}
+
+.statusInProgress {
+    color: #0070f2 !important;
+    font-weight: 700;
+}
+
+.statusCompleted {
+    color: #107e3e !important;
+    font-weight: 700;
+}
+
+/* Form Container */
+.formContainer {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/* Table Styling */
+.transparentTable {
+    background: transparent !important;
+}
+
+.transparentTable .sapMListTblHeader {
+    background: rgba(255,255,255,0.5) !important;
+}
