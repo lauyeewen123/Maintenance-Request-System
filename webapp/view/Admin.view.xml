@@ -2,65 +2,86 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <Page id="adminPage" title="Admin - Maintenance Dashboard" showNavButton="true" navButtonPress=".onNavBack">
+    <Page id="adminPage" title="Admin - Maintenance Dashboard" showNavButton="true" navButtonPress=".onNavBack" class="homePageBackground">
         <content>
-            <VBox class="sapUiSmallMargin">
+            <VBox class="sapUiMediumMargin">
                  <!-- Summary Cards -->
-                <HBox class="sapUiMediumMarginBottom" wrap="Wrap">
-                    <GenericTile class="sapUiSmallMarginEnd" header="Total Requests">
-                       <TileContent> <NumericContent value="{= ${maintenance>/tickets}.length }" icon="sap-icon://request" /> </TileContent>
-                    </GenericTile>
-                    <GenericTile class="sapUiSmallMarginEnd" header="Pending">
-                       <TileContent> <NumericContent value="{maintenance>/stats/pending}" icon="sap-icon://pending" valueColor="Critical" /> </TileContent>
-                    </GenericTile>
-                     <GenericTile class="sapUiSmallMarginEnd" header="In Progress">
-                       <TileContent> <NumericContent value="{maintenance>/stats/inprogress}" icon="sap-icon://in-progress" valueColor="Neutral" /> </TileContent>
-                    </GenericTile>
-                    <GenericTile class="sapUiSmallMarginEnd" header="Completed">
-                       <TileContent> <NumericContent value="{maintenance>/stats/completedAdmin}" icon="sap-icon://complete" valueColor="Good" /> </TileContent>
-                    </GenericTile>
+                <HBox class="sapUiMediumMarginBottom" wrap="Wrap" justifyContent="SpaceBetween">
+                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom customTile" width="220px" xmlns:f="sap.f">
+                        <f:header>
+                            <card:Header title="Total Requests" iconSrc="sap-icon://request" xmlns:card="sap.f.cards"/>
+                        </f:header>
+                        <f:content>
+                            <HBox justifyContent="Center" class="sapUiSmallMargin">
+                                <Title text="{= ${maintenance>/tickets}.length }" titleStyle="H1" />
+                            </HBox>
+                        </f:content>
+                    </f:Card>
+
+                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom customTile" width="220px" xmlns:f="sap.f">
+                        <f:header>
+                            <card:Header title="Pending Action" iconSrc="sap-icon://pending" xmlns:card="sap.f.cards"/>
+                        </f:header>
+                        <f:content>
+                            <HBox justifyContent="Center" class="sapUiSmallMargin">
+                                <Title text="{maintenance>/stats/pending}" titleStyle="H1" class="statusPending"/>
+                            </HBox>
+                        </f:content>
+                    </f:Card>
+
+                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom customTile" width="220px" xmlns:f="sap.f">
+                        <f:header>
+                            <card:Header title="In Progress" iconSrc="sap-icon://in-progress" xmlns:card="sap.f.cards"/>
+                        </f:header>
+                        <f:content>
+                            <HBox justifyContent="Center" class="sapUiSmallMargin">
+                                <Title text="{maintenance>/stats/inprogress}" titleStyle="H1" class="statusInProgress"/>
+                            </HBox>
+                        </f:content>
+                    </f:Card>
                 </HBox>
 
-                <Table id="adminTable" items="{maintenance>/tickets}">
-                     <headerToolbar>
-                        <OverflowToolbar>
-                            <Title text="All Tickets" level="H2"/>
-                            <ToolbarSpacer/>
-                            <SegmentedButton selectionChange=".onFilterSelect" selectedKey="All">
-                                <items>
-                                    <SegmentedButtonItem text="All" key="All" />
-                                    <SegmentedButtonItem text="Pending" key="Pending" />
-                                    <SegmentedButtonItem text="In Progress" key="In Progress" />
-                                    <SegmentedButtonItem text="Completed" key="Completed" />
-                                </items>
-                            </SegmentedButton>
-                        </OverflowToolbar>
-                    </headerToolbar>
-                    <columns>
-                        <Column><Text text="Ticket ID" /></Column>
-                        <Column><Text text="Student Name" /></Column>
-                        <Column><Text text="Room" /></Column>
-                        <Column><Text text="Category" /></Column>
-                        <Column><Text text="Status" /></Column>
-                        <Column><Text text="Action" /></Column>
-                    </columns>
+                <!-- Icon Tab Bar for Filtering -->
+                <IconTabBar id="idIconTabBar" select=".onFilterSelect" class="sapUiResponsiveContentPadding customTile" expandable="false">
                     <items>
-                        <ColumnListItem>
-                            <cells>
-                                <Text text="{maintenance>id}" />
-                                <Text text="{maintenance>studentName}" />
-                                <Text text="{maintenance>room}" />
-                                <Text text="{maintenance>category}" />
-                                <ObjectStatus text="{maintenance>status}" 
-                                    state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }" />
-                                <Button text="{= ${maintenance>status} === 'Pending' ? 'Assign Tech' : ${maintenance>status} === 'In Progress' ? 'Update Status' : '' }"
-                                        enabled="{= ${maintenance>status} !== 'Completed' }"
-                                        press=".onPressAction"
-                                        type="Transparent"/>
-                            </cells>
-                        </ColumnListItem>
+                        <IconTabFilter showAll="true" count="{= ${maintenance>/tickets}.length }" text="All Tickets" key="All" />
+                        <IconTabSeparator />
+                        <IconTabFilter icon="sap-icon://alert" iconColor="Critical" count="{maintenance>/stats/pending}" text="Pending" key="Pending" />
+                        <IconTabFilter icon="sap-icon://wrench" iconColor="Neutral" count="{maintenance>/stats/inprogress}" text="In Progress" key="In Progress" />
+                        <IconTabFilter icon="sap-icon://accept" iconColor="Positive" count="{maintenance>/stats/completedAdmin}" text="Completed" key="Completed" />
                     </items>
-                </Table>
+                    <content>
+                        <Table id="adminTable" items="{maintenance>/tickets}" inset="false" class="sapUiSmallMarginTop">
+                            <columns>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Ticket ID" /></Column>
+                                <Column><Text text="Student Name" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Room" /></Column>
+                                <Column><Text text="Category" /></Column>
+                                <Column><Text text="Status" /></Column>
+                                <Column hAlign="End"><Text text="Action" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Navigation" press=".onListItemPress">
+                                    <cells>
+                                        <ObjectIdentifier title="{maintenance>id}" text="{maintenance>date}"/>
+                                        <Text text="{maintenance>studentName}" />
+                                        <Text text="{maintenance>room}" />
+                                        <ObjectStatus text="{maintenance>category}" state="Indication05" icon="sap-icon://wrench"/>
+                                        <ObjectStatus text="{maintenance>status}" 
+                                            state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }" 
+                                            icon="{= ${maintenance>status} === 'Completed' ? 'sap-icon://accept' : ${maintenance>status} === 'In Progress' ? 'sap-icon://in-progress' : 'sap-icon://pending' }" />
+                                        
+                                        <Button text="{= ${maintenance>status} === 'Pending' ? 'Assign Tech' : ${maintenance>status} === 'In Progress' ? 'Update Status' : 'View' }"
+                                                icon="{= ${maintenance>status} === 'Pending' ? 'sap-icon://employee-approvals' : ${maintenance>status} === 'In Progress' ? 'sap-icon://edit' : 'sap-icon://display' }"
+                                                type="{= ${maintenance>status} === 'Pending' ? 'Emphasized' : 'Transparent' }"
+                                                enabled="true"
+                                                press=".onPressAction"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </content>
+                </IconTabBar>
             </VBox>
         </content>
     </Page>

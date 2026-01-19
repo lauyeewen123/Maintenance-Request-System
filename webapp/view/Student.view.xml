@@ -3,46 +3,61 @@
     xmlns="sap.m"
     xmlns:card="sap.f.cards"
     xmlns:f="sap.f">
-    <Page id="studentPage" title="Student Dashboard" showNavButton="true" navButtonPress=".onNavBack">
+    <Page id="studentPage" title="Student Dashboard" showNavButton="true" navButtonPress=".onNavBack" class="homePageBackground">
         <headerContent>
             <Button id="btnReport" text="Report New Issue" type="Emphasized" press=".onPressReport" icon="sap-icon://add" />
         </headerContent>
         <content>
-            <VBox class="sapUiSmallMargin">
-                <HBox class="sapUiMediumMarginBottom" justifyContent="SpaceBetween">
-                    <GenericTile class="sapUiSmallMarginBegin" header="Active Requests" subheader="Pending &amp; In Progress">
-                        <TileContent>
-                            <NumericContent value="{maintenance>/stats/active}" icon="sap-icon://working-deadlines" valueColor="Critical" />
-                        </TileContent>
-                    </GenericTile>
-                    <GenericTile class="sapUiSmallMarginEnd" header="Completed Requests" subheader="Resolved Issues">
-                        <TileContent>
-                            <NumericContent value="{maintenance>/stats/completed}" icon="sap-icon://complete" valueColor="Good" />
-                        </TileContent>
-                    </GenericTile>
+            <VBox class="sapUiMediumMargin">
+                <HBox class="sapUiMediumMarginBottom" justifyContent="SpaceBetween" wrap="Wrap">
+                    <f:Card class="sapUiSmallMarginEnd customTile" width="300px">
+                        <f:header>
+                            <card:Header title="Active Requests" subtitle="Pending &amp; Checking" iconSrc="sap-icon://working-deadlines" xmlns:card="sap.f.cards"/>
+                        </f:header>
+                        <f:content>
+                             <HBox justifyContent="Center" class="sapUiSmallMargin">
+                                <Title text="{maintenance>/stats/active}" titleStyle="H1" class="statusPending"/>
+                             </HBox>
+                        </f:content>
+                    </f:Card>
+
+                    <f:Card class="sapUiSmallMarginEnd customTile" width="300px">
+                         <f:header>
+                            <card:Header title="Completed Requests" subtitle="Resolved Issues" iconSrc="sap-icon://complete" xmlns:card="sap.f.cards"/>
+                        </f:header>
+                        <f:content>
+                             <HBox justifyContent="Center" class="sapUiSmallMargin">
+                                <Title text="{maintenance>/stats/completed}" titleStyle="H1" class="statusCompleted"/>
+                             </HBox>
+                        </f:content>
+                    </f:Card>
                 </HBox>
 
-                <Title text="Recent Activities" titleStyle="H3" class="sapUiSmallMarginBottom"/>
-                
-                <Table id="recentActivitiesTable" items="{maintenance>/tickets}">
-                    <columns>
-                        <Column><Text text="Ticket ID" /></Column>
-                        <Column><Text text="Category" /></Column>
-                        <Column><Text text="Date" /></Column>
-                        <Column><Text text="Status" /></Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem>
-                            <cells>
-                                <Text text="{maintenance>id}" />
-                                <Text text="{maintenance>category}" />
-                                <Text text="{maintenance>date}" />
-                                <ObjectStatus text="{maintenance>status}" 
-                                    state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }" />
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                <f:Card class="customTile">
+                     <f:header>
+                        <card:Header title="Recent Activities" iconSrc="sap-icon://history" xmlns:card="sap.f.cards"/>
+                    </f:header>
+                    <f:content>
+                        <Table id="recentActivitiesTable" items="{maintenance>/tickets}" inset="false" growing="true" growingThreshold="5">
+                            <columns>
+                                <Column><Text text="Ticket ID / Date" /></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Category" /></Column>
+                                <Column hAlign="End"><Text text="Status" /></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <ObjectIdentifier title="{maintenance>id}" text="{maintenance>date}" />
+                                        <Text text="{maintenance>category}" />
+                                        <ObjectStatus text="{maintenance>status}" 
+                                            state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }"
+                                            icon="{= ${maintenance>status} === 'Completed' ? 'sap-icon://accept' : ${maintenance>status} === 'In Progress' ? 'sap-icon://in-progress' : 'sap-icon://pending' }" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </f:content>
+                </f:Card>
             </VBox>
         </content>
     </Page>

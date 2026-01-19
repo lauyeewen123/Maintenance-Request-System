@@ -23,6 +23,7 @@ sap.ui.define([
             var oModel = this.getView().getModel("maintenance");
             var aTickets = oModel.getProperty("/tickets");
 
+            // --- Admin Stats ---
             var iPending = aTickets.filter(function(t){ return t.status === 'Pending'; }).length;
             var iInProgress = aTickets.filter(function(t){ return t.status === 'In Progress'; }).length;
             var iCompleted = aTickets.filter(function(t){ return t.status === 'Completed'; }).length;
@@ -30,6 +31,14 @@ sap.ui.define([
             oModel.setProperty("/stats/pending", iPending);
             oModel.setProperty("/stats/inprogress", iInProgress);
             oModel.setProperty("/stats/completedAdmin", iCompleted);
+
+            // --- Sync Student Stats (Global Consistency) ---
+            // Active = Pending + In Progress (Everything not completed)
+            var iStudentActive = aTickets.filter(function(t){ return t.status !== 'Completed'; }).length;
+            var iStudentCompleted = iCompleted;
+
+            oModel.setProperty("/stats/active", iStudentActive);
+            oModel.setProperty("/stats/completed", iStudentCompleted);
         },
 
         onFilterSelect: function (oEvent) {
@@ -55,7 +64,38 @@ sap.ui.define([
                 this._openAssignDialog();
             } else if (oData.status === "In Progress") {
                 this._openCompleteDialog();
+            } else {
+                 this._openDetailsDialog(oContext);
             }
+        },
+
+        onListItemPress: function (oEvent) {
+             var oContext = oEvent.getSource().getBindingContext("maintenance");
+             this._openDetailsDialog(oContext);
+        },
+
+        _openDetailsDialog: function (oContext) {
+             var oView = this.getView();
+            if (!this._pDetailsDialog) {
+                this._pDetailsDialog = Fragment.load({
+                    id: oView.getId(),
+                    name: "project1.view.fragments.TicketDetails",
+                    controller: this
+                }).then(function (oDialog) {
+                    oView.addDependent(oDialog);
+                    return oDialog;
+                });
+            }
+            this._pDetailsDialog.then(function (oDialog) {
+                oDialog.setBindingContext(oContext, "maintenance");
+                oDialog.open();
+            });
+        },
+
+        onCloseDetails: function () {
+             this._pDetailsDialog.then(function (oDialog) {
+                oDialog.close();
+            });
         },
 
         _openAssignDialog: function () {

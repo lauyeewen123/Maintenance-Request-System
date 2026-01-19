@@ -3,22 +3,30 @@
     xmlns="sap.m"
     xmlns:f="sap.f"
     displayBlock="true">
-    <Page id="page" title="Hostel Management System">
+    <Page id="page" title="Hostel Management System" class="homePageBackground">
         <content>
             <VBox class="sapUiSmallMargin" justifyContent="Center" alignItems="Center" height="100%">
-                <Title text="Welcome to the Maintenance Portal" titleStyle="H1" class="sapUiMediumMarginBottom"/>
-                <HBox>
-                    <GenericTile class="sapUiSmallMargin" header="Student Portal" subheader="Report &amp; Track Issues" press=".onPressStudent">
+                
+                <VBox alignItems="Center" class="sapUiMediumMarginBottom">
+                    <core:Icon src="sap-icon://wrench" size="4rem" color="#0854a0" class="sapUiSmallMarginBottom" xmlns:core="sap.ui.core" />
+                    <Title text="Maintenance Portal" titleStyle="H1" class="pageHeaderTitle"/>
+                    <Text text="Report issues and track repairs instantly" class="sapUiTinyMarginTop sapUiDisplayBlock" />
+                </VBox>
+
+                <HBox wrap="Wrap" justifyContent="Center">
+                    <GenericTile class="sapUiMediumMargin customTile" header="Student Portal" subheader="Report &amp; Track Issues" press=".onPressStudent" backgroundImage="sap-icon://student">
                         <TileContent>
-                            <ImageContent src="sap-icon://student" />
+                            <ImageContent src="sap-icon://add-activity" />
                         </TileContent>
                     </GenericTile>
-                    <GenericTile class="sapUiSmallMargin" header="Admin Portal" subheader="Manage Requests" press=".onPressAdmin">
+                    
+                    <GenericTile class="sapUiMediumMargin customTile" header="Admin Portal" subheader="Manage Requests" press=".onPressAdmin" backgroundImage="sap-icon://manager">
                         <TileContent>
                             <ImageContent src="sap-icon://action-settings" />
                         </TileContent>
                     </GenericTile>
                 </HBox>
+
             </VBox>
         </content>
     </Page>

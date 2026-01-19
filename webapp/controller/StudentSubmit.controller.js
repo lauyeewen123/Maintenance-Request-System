@@ -46,8 +46,8 @@ sap.ui.define([
                 technician: ""
             };
 
-            // Add to list
-            aTickets.push(oPayload);
+            // Add to list (Unshift to add to TOP of list for better visibility)
+            aTickets.unshift(oPayload);
             oModel.setProperty("/tickets", aTickets);
 
             MessageToast.show("Request Submitted Successfully");
