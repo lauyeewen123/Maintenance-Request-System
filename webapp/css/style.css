@@ -23,19 +23,33 @@
 
 /* Customized Cards/Tiles */
 .fancyCard {
-    border-radius: 12px !important;
-    border: none !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15) !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }
 
 .fancyCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25) !important;
 }
+
+/* Headers inside cards */
+.fancyCard .sapFCardHeader {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.fancyCard .sapFCardTitle {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: #2c3e50 !important;
+}
+
 
 /* Add a colored accent bar to the top of cards */
 .accentTopBorder {
@@ -88,5 +102,31 @@
 }
 
 .transparentTable .sapMListTblHeader {
-    background: rgba(255,255,255,0.5) !important;
+    background: rgba(0,0,0,0.03) !important;
+    border-bottom: none !important;
+}
+
+.transparentTable .sapMListTblRow {
+    border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+    background: transparent !important;
+}
+
+.transparentTable .sapMText {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* Specific Big Numbers */
+.statusPending {
+    color: #d97d00 !important;
+    font-weight: 800 !important;
+    font-size: 3rem !important; /* Make numbers HUGE */
+    text-shadow: 2px 2px 0px rgba(217, 125, 0, 0.1);
+}
+
+.statusCompleted {
+    color: #107e3e !important;
+    font-weight: 800 !important;
+    font-size: 3rem !important;
+    text-shadow: 2px 2px 0px rgba(16, 126, 62, 0.1);
 }
