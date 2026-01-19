@@ -51,6 +51,11 @@
         "settings": {
           "bundleName": "project1.i18n.i18n"
         }
+      },
+      "maintenance": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/maintenance.json",
+        "preload": true
       }
     },
     "resources": {
@@ -74,17 +79,50 @@
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": ":?query:",
+          "name": "RouteHome",
+          "pattern": "",
           "target": [
-            "TargetView1"
+            "TargetHome"
+          ]
+        },
+        {
+          "name": "RouteStudent",
+          "pattern": "student",
+          "target": [
+            "TargetStudent"
+          ]
+        },
+        {
+          "name": "RouteStudentSubmit",
+          "pattern": "student/submit",
+          "target": [
+            "TargetStudentSubmit"
+          ]
+        },
+        {
+          "name": "RouteAdmin",
+          "pattern": "admin",
+          "target": [
+            "TargetAdmin"
           ]
         }
       ],
       "targets": {
-        "TargetView1": {
-          "id": "View1",
-          "name": "View1"
+        "TargetHome": {
+          "id": "Home",
+          "name": "Home"
+        },
+        "TargetStudent": {
+          "id": "Student",
+          "name": "Student"
+        },
+        "TargetStudentSubmit": {
+          "id": "StudentSubmit",
+          "name": "StudentSubmit"
+        },
+        "TargetAdmin": {
+          "id": "Admin",
+          "name": "Admin"
         }
       }
     },

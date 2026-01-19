@@ -1,0 +1,67 @@
+<mvc:View controllerName="project1.controller.Admin"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page id="adminPage" title="Admin - Maintenance Dashboard" showNavButton="true" navButtonPress=".onNavBack">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                 <!-- Summary Cards -->
+                <HBox class="sapUiMediumMarginBottom" wrap="Wrap">
+                    <GenericTile class="sapUiSmallMarginEnd" header="Total Requests">
+                       <TileContent> <NumericContent value="{= ${maintenance>/tickets}.length }" icon="sap-icon://request" /> </TileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiSmallMarginEnd" header="Pending">
+                       <TileContent> <NumericContent value="{maintenance>/stats/pending}" icon="sap-icon://pending" valueColor="Critical" /> </TileContent>
+                    </GenericTile>
+                     <GenericTile class="sapUiSmallMarginEnd" header="In Progress">
+                       <TileContent> <NumericContent value="{maintenance>/stats/inprogress}" icon="sap-icon://in-progress" valueColor="Neutral" /> </TileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiSmallMarginEnd" header="Completed">
+                       <TileContent> <NumericContent value="{maintenance>/stats/completedAdmin}" icon="sap-icon://complete" valueColor="Good" /> </TileContent>
+                    </GenericTile>
+                </HBox>
+
+                <Table id="adminTable" items="{maintenance>/tickets}">
+                     <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="All Tickets" level="H2"/>
+                            <ToolbarSpacer/>
+                            <SegmentedButton selectionChange=".onFilterSelect" selectedKey="All">
+                                <items>
+                                    <SegmentedButtonItem text="All" key="All" />
+                                    <SegmentedButtonItem text="Pending" key="Pending" />
+                                    <SegmentedButtonItem text="In Progress" key="In Progress" />
+                                    <SegmentedButtonItem text="Completed" key="Completed" />
+                                </items>
+                            </SegmentedButton>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column><Text text="Ticket ID" /></Column>
+                        <Column><Text text="Student Name" /></Column>
+                        <Column><Text text="Room" /></Column>
+                        <Column><Text text="Category" /></Column>
+                        <Column><Text text="Status" /></Column>
+                        <Column><Text text="Action" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{maintenance>id}" />
+                                <Text text="{maintenance>studentName}" />
+                                <Text text="{maintenance>room}" />
+                                <Text text="{maintenance>category}" />
+                                <ObjectStatus text="{maintenance>status}" 
+                                    state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }" />
+                                <Button text="{= ${maintenance>status} === 'Pending' ? 'Assign Tech' : ${maintenance>status} === 'In Progress' ? 'Update Status' : '' }"
+                                        enabled="{= ${maintenance>status} !== 'Completed' }"
+                                        press=".onPressAction"
+                                        type="Transparent"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

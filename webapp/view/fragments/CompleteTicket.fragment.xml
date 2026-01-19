@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog title="Update Repair Status" contentWidth="300px">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Label text="Remarks" />
+                <TextArea id="remarksArea" placeholder="e.g., Part replaced" rows="3" width="100%" />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Mark as Completed" type="Emphasized" press=".onConfirmComplete" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press=".onCancelComplete" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

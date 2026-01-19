@@ -1,0 +1,49 @@
+<mvc:View controllerName="project1.controller.Student"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:card="sap.f.cards"
+    xmlns:f="sap.f">
+    <Page id="studentPage" title="Student Dashboard" showNavButton="true" navButtonPress=".onNavBack">
+        <headerContent>
+            <Button id="btnReport" text="Report New Issue" type="Emphasized" press=".onPressReport" icon="sap-icon://add" />
+        </headerContent>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <HBox class="sapUiMediumMarginBottom" justifyContent="SpaceBetween">
+                    <GenericTile class="sapUiSmallMarginBegin" header="Active Requests" subheader="Pending &amp; In Progress">
+                        <TileContent>
+                            <NumericContent value="{maintenance>/stats/active}" icon="sap-icon://working-deadlines" valueColor="Critical" />
+                        </TileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiSmallMarginEnd" header="Completed Requests" subheader="Resolved Issues">
+                        <TileContent>
+                            <NumericContent value="{maintenance>/stats/completed}" icon="sap-icon://complete" valueColor="Good" />
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
+
+                <Title text="Recent Activities" titleStyle="H3" class="sapUiSmallMarginBottom"/>
+                
+                <Table id="recentActivitiesTable" items="{maintenance>/tickets}">
+                    <columns>
+                        <Column><Text text="Ticket ID" /></Column>
+                        <Column><Text text="Category" /></Column>
+                        <Column><Text text="Date" /></Column>
+                        <Column><Text text="Status" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{maintenance>id}" />
+                                <Text text="{maintenance>category}" />
+                                <Text text="{maintenance>date}" />
+                                <ObjectStatus text="{maintenance>status}" 
+                                    state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

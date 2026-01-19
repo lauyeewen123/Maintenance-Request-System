@@ -1,0 +1,49 @@
+{
+  "tickets": [
+    {
+      "id": "MT-2024-001",
+      "studentName": "Ali Bin Abu",
+      "room": "A-101",
+      "category": "Electrical",
+      "description": "Ceiling fan not working",
+      "status": "Pending",
+      "date": "2025-01-15",
+      "technician": ""
+    },
+    {
+      "id": "MT-2024-002",
+      "studentName": "Siti Aminah",
+      "room": "B-205",
+      "category": "Plumbing",
+      "description": "Leaking sink pipe",
+      "status": "In Progress",
+      "date": "2025-01-14",
+      "technician": "Mr. Azman"
+    }
+  ],
+  "categories": [
+    { "key": "Electrical", "text": "Electrical" },
+    { "key": "Plumbing", "text": "Plumbing" },
+    { "key": "Furniture", "text": "Furniture" },
+    { "key": "Internet", "text": "Internet" },
+    { "key": "Other", "text": "Other" }
+  ],
+  "technicians": [
+    { "key": "Mr. Azman", "text": "Mr. Azman" },
+    { "key": "Mr. Tan", "text": "Mr. Tan" },
+    { "key": "Ms. Lee", "text": "Ms. Lee" }
+  ],
+  "newTicket": {
+    "studentName": "Ali Bin Abu",
+    "room": "A-101",
+    "category": "Electrical",
+    "description": "",
+    "status": "Pending",
+    "technician": "",
+    "date": "" 
+  },
+  "stats": {
+    "active": 0,
+    "completed": 0
+  }
+}

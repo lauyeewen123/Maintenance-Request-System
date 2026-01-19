@@ -1,0 +1,25 @@
+<mvc:View controllerName="project1.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    displayBlock="true">
+    <Page id="page" title="Hostel Management System">
+        <content>
+            <VBox class="sapUiSmallMargin" justifyContent="Center" alignItems="Center" height="100%">
+                <Title text="Welcome to the Maintenance Portal" titleStyle="H1" class="sapUiMediumMarginBottom"/>
+                <HBox>
+                    <GenericTile class="sapUiSmallMargin" header="Student Portal" subheader="Report &amp; Track Issues" press=".onPressStudent">
+                        <TileContent>
+                            <ImageContent src="sap-icon://student" />
+                        </TileContent>
+                    </GenericTile>
+                    <GenericTile class="sapUiSmallMargin" header="Admin Portal" subheader="Manage Requests" press=".onPressAdmin">
+                        <TileContent>
+                            <ImageContent src="sap-icon://action-settings" />
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View> 
