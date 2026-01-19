@@ -5,40 +5,44 @@
     xmlns:f="sap.f">
     <Page id="studentPage" title="Student Dashboard" showNavButton="true" navButtonPress=".onNavBack" class="homePageBackground">
         <headerContent>
-            <Button id="btnReport" text="Report New Issue" type="Emphasized" press=".onPressReport" icon="sap-icon://add" />
+            <Button id="btnReport" text="New Request" type="Emphasized" press=".onPressReport" icon="sap-icon://add" class="scanButton" />
         </headerContent>
         <content>
             <VBox class="sapUiMediumMargin">
+                <Title text="My Overview" titleStyle="H3" class="sapUiSmallMarginBottom"/>
+
                 <HBox class="sapUiMediumMarginBottom" justifyContent="SpaceBetween" wrap="Wrap">
-                    <f:Card class="sapUiSmallMarginEnd customTile" width="300px">
+                    <f:Card class="sapUiSmallMarginEnd fancyCard accentTopBorderCritical" width="300px">
                         <f:header>
                             <card:Header title="Active Requests" subtitle="Pending &amp; Checking" iconSrc="sap-icon://working-deadlines" xmlns:card="sap.f.cards"/>
                         </f:header>
                         <f:content>
-                             <HBox justifyContent="Center" class="sapUiSmallMargin">
-                                <Title text="{maintenance>/stats/active}" titleStyle="H1" class="statusPending"/>
+                             <HBox justifyContent="Center" alignItems="Center" class="sapUiMediumMargin">
+                                <Title text="{maintenance>/stats/active}" titleStyle="H1" class="statusPending" />
+                                <core:Icon src="sap-icon://alert" class="sapUiSmallMarginBegin statusPending" size="2rem" xmlns:core="sap.ui.core"/>
                              </HBox>
                         </f:content>
                     </f:Card>
 
-                    <f:Card class="sapUiSmallMarginEnd customTile" width="300px">
+                    <f:Card class="sapUiSmallMarginEnd fancyCard accentTopBorderSuccess" width="300px">
                          <f:header>
                             <card:Header title="Completed Requests" subtitle="Resolved Issues" iconSrc="sap-icon://complete" xmlns:card="sap.f.cards"/>
                         </f:header>
                         <f:content>
-                             <HBox justifyContent="Center" class="sapUiSmallMargin">
+                             <HBox justifyContent="Center" alignItems="Center" class="sapUiMediumMargin">
                                 <Title text="{maintenance>/stats/completed}" titleStyle="H1" class="statusCompleted"/>
+                                <core:Icon src="sap-icon://sys-enter-2" class="sapUiSmallMarginBegin statusCompleted" size="2rem" xmlns:core="sap.ui.core"/>
                              </HBox>
                         </f:content>
                     </f:Card>
                 </HBox>
 
-                <f:Card class="customTile">
+                <f:Card class="fancyCard">
                      <f:header>
                         <card:Header title="Recent Activities" iconSrc="sap-icon://history" xmlns:card="sap.f.cards"/>
                     </f:header>
                     <f:content>
-                        <Table id="recentActivitiesTable" items="{maintenance>/tickets}" inset="false" growing="true" growingThreshold="5">
+                        <Table id="recentActivitiesTable" items="{maintenance>/tickets}" inset="false" growing="true" growingThreshold="5" class="transparentTable">
                             <columns>
                                 <Column><Text text="Ticket ID / Date" /></Column>
                                 <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Category" /></Column>
@@ -51,6 +55,7 @@
                                         <Text text="{maintenance>category}" />
                                         <ObjectStatus text="{maintenance>status}" 
                                             state="{= ${maintenance>status} === 'Completed' ? 'Success' : ${maintenance>status} === 'In Progress' ? 'Information' : 'Warning' }"
+                                            inverted="true"
                                             icon="{= ${maintenance>status} === 'Completed' ? 'sap-icon://accept' : ${maintenance>status} === 'In Progress' ? 'sap-icon://in-progress' : 'sap-icon://pending' }" />
                                     </cells>
                                 </ColumnListItem>

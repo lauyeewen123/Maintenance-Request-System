@@ -3,42 +3,50 @@
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
     xmlns:u="sap.ui.unified">
-    <Page id="submitPage" title="Report New Issue" showNavButton="true" navButtonPress=".onNavBack">
+    <Page id="submitPage" title="Report New Issue" showNavButton="true" navButtonPress=".onNavBack" class="homePageBackground">
         <content>
-            <VBox class="sapUiSmallMargin">
-                <f:SimpleForm id="SimpleFormDisplay354"
-                    editable="true"
-                    layout="ResponsiveGridLayout"
-                    title="Maintenance Request Form"
-                    labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
-                    adjustLabelSpan="false"
-                    emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
-                    columnsXL="1" columnsL="1" columnsM="1"
-                    singleContainerFullSize="false">
-                    <f:content>
-                        <Label text="Student Name" />
-                        <Input value="{maintenance>/newTicket/studentName}" editable="false" />
-                        
-                        <Label text="Room Number" />
-                        <Input value="{maintenance>/newTicket/room}" editable="false" />
+            <VBox class="sapUiMediumMargin" justifyContent="Center" alignItems="Center">
+                
+                <VBox width="100%" maxWidth="800px" class="formContainer fancyCard">
+                    <HBox alignItems="Center" class="sapUiSmallMarginBottom">
+                        <core:Icon src="sap-icon://add-document" size="2rem" color="#0a6ed1" class="sapUiSmallMarginEnd" xmlns:core="sap.ui.core"/>
+                        <Title text="Maintenance Request Form" level="H2"/>
+                    </HBox>
 
-                        <Label text="Category" required="true"/>
-                        <Select id="categorySelect" selectedKey="{maintenance>/newTicket/category}" items="{maintenance>/categories}">
-                            <core:Item key="{maintenance>key}" text="{maintenance>text}" xmlns:core="sap.ui.core" />
-                        </Select>
+                    <f:SimpleForm id="SimpleFormDisplay354"
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsM="2"
+                        columnsL="2"
+                        columnsXL="2">
+                        <f:content>
+                            <core:Title text="General Information" xmlns:core="sap.ui.core" />
+                            <Label text="Student Name" />
+                            <Input value="{maintenance>/newTicket/studentName}" editable="false" icon="sap-icon://student"/>
+                            
+                            <Label text="Room Number" />
+                            <Input value="{maintenance>/newTicket/room}" editable="false" icon="sap-icon://building"/>
 
-                        <Label text="Description" required="true"/>
-                        <TextArea id="descriptionArea" value="{maintenance>/newTicket/description}" placeholder="Please describe the issue..." rows="4" />
+                            <core:Title text="Issue Details" xmlns:core="sap.ui.core" />
+                            <Label text="Category" required="true"/>
+                            <Select id="categorySelect" selectedKey="{maintenance>/newTicket/category}" items="{maintenance>/categories}" icon="sap-icon://sys-find">
+                                <core:Item key="{maintenance>key}" text="{maintenance>text}" xmlns:core="sap.ui.core" />
+                            </Select>
 
-                        <Label text="Evidence" />
-                        <u:FileUploader id="fileUploader" name="myFileUpload" placeholder="Click to upload photo" style="Emphasized" />
-                        
-                    </f:content>
-                </f:SimpleForm>
+                            <Label text="Description" required="true"/>
+                            <TextArea id="descriptionArea" value="{maintenance>/newTicket/description}" placeholder="Please describe the issue..." rows="5" growing="true" />
 
-                <HBox justifyContent="End" class="sapUiSmallMarginTop">
-                     <Button text="Submit Request" type="Emphasized" press=".onSubmit" />
-                </HBox>
+                            <Label text="Evidence" />
+                            <u:FileUploader id="fileUploader" name="myFileUpload" placeholder="Upload photo..." style="Emphasized" icon="sap-icon://attachment-photo"/>
+                            
+                        </f:content>
+                    </f:SimpleForm>
+
+                    <HBox justifyContent="End" class="sapUiMediumMarginTop">
+                         <Button text="Cancel" type="Transparent" press=".onNavBack" class="sapUiSmallMarginEnd" />
+                         <Button text="Submit Request" type="Emphasized" press=".onSubmit" class="scanButton" />
+                    </HBox>
+                </VBox>
             </VBox>
         </content>
     </Page>

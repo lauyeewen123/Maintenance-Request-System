@@ -7,7 +7,7 @@
             <VBox class="sapUiMediumMargin">
                  <!-- Summary Cards -->
                 <HBox class="sapUiMediumMarginBottom" wrap="Wrap" justifyContent="SpaceBetween">
-                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom customTile" width="220px" xmlns:f="sap.f">
+                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom fancyCard accentTopBorder" width="220px" xmlns:f="sap.f">
                         <f:header>
                             <card:Header title="Total Requests" iconSrc="sap-icon://request" xmlns:card="sap.f.cards"/>
                         </f:header>
@@ -18,7 +18,7 @@
                         </f:content>
                     </f:Card>
 
-                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom customTile" width="220px" xmlns:f="sap.f">
+                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom fancyCard accentTopBorderCritical" width="220px" xmlns:f="sap.f">
                         <f:header>
                             <card:Header title="Pending Action" iconSrc="sap-icon://pending" xmlns:card="sap.f.cards"/>
                         </f:header>
@@ -29,7 +29,7 @@
                         </f:content>
                     </f:Card>
 
-                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom customTile" width="220px" xmlns:f="sap.f">
+                    <f:Card class="sapUiSmallMarginEnd sapUiMediumMarginBottom fancyCard accentTopBorder" width="220px" xmlns:f="sap.f">
                         <f:header>
                             <card:Header title="In Progress" iconSrc="sap-icon://in-progress" xmlns:card="sap.f.cards"/>
                         </f:header>
@@ -42,7 +42,7 @@
                 </HBox>
 
                 <!-- Icon Tab Bar for Filtering -->
-                <IconTabBar id="idIconTabBar" select=".onFilterSelect" class="sapUiResponsiveContentPadding customTile" expandable="false">
+                <IconTabBar id="idIconTabBar" select=".onFilterSelect" class="sapUiResponsiveContentPadding fancyCard" expandable="false">
                     <items>
                         <IconTabFilter showAll="true" count="{= ${maintenance>/tickets}.length }" text="All Tickets" key="All" />
                         <IconTabSeparator />
