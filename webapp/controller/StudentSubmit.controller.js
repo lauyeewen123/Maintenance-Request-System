@@ -24,9 +24,19 @@ sap.ui.define([
             var oModel = this.getView().getModel("maintenance");
             var oNewTicket = oModel.getProperty("/newTicket");
 
+            var sFile = this.byId("fileUploader").getValue();
+            var bValidationError = false;
+
             // Validation
             if (!oNewTicket.description || oNewTicket.description.trim() === "") {
-                MessageToast.show("Please fill all fields");
+                 bValidationError = true;
+            }
+            if (!sFile || sFile.trim() === "") {
+                 bValidationError = true;
+            }
+
+            if (bValidationError) {
+                MessageToast.show("Please fill all required fields and upload evidence.");
                 return;
             }
 

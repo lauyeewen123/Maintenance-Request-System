@@ -49,7 +49,7 @@
                                 <Column hAlign="End"><Text text="Status" /></Column>
                             </columns>
                             <items>
-                                <ColumnListItem>
+                                <ColumnListItem type="Navigation" press=".onListItemPress">
                                     <cells>
                                         <ObjectIdentifier title="{maintenance>id}" text="{maintenance>date}" />
                                         <Text text="{maintenance>category}" />

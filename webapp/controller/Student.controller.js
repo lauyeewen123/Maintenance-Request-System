@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/UIComponent",
-    "sap/ui/core/routing/History"
-], function (Controller, UIComponent, History) {
+    "sap/ui/core/routing/History",
+    "sap/ui/core/Fragment"
+], function (Controller, UIComponent, History, Fragment) {
     "use strict";
 
     return Controller.extend("project1.controller.Student", {
@@ -29,6 +30,35 @@ sap.ui.define([
         onPressReport: function () {
             var oRouter = UIComponent.getRouterFor(this);
             oRouter.navTo("RouteStudentSubmit");
+        },
+
+        onListItemPress: function (oEvent) {
+             var oContext = oEvent.getSource().getBindingContext("maintenance");
+             this._openDetailsDialog(oContext);
+        },
+
+        _openDetailsDialog: function (oContext) {
+             var oView = this.getView();
+            if (!this._pDetailsDialog) {
+                this._pDetailsDialog = Fragment.load({
+                    id: oView.getId(),
+                    name: "project1.view.fragments.TicketDetails",
+                    controller: this
+                }).then(function (oDialog) {
+                    oView.addDependent(oDialog);
+                    return oDialog;
+                });
+            }
+            this._pDetailsDialog.then(function (oDialog) {
+                oDialog.setBindingContext(oContext, "maintenance");
+                oDialog.open();
+            });
+        },
+
+        onCloseDetails: function () {
+             this._pDetailsDialog.then(function (oDialog) {
+                oDialog.close();
+            });
         },
 
         onNavBack: function () {

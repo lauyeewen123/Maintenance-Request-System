@@ -36,7 +36,7 @@
                             <Label text="Description" required="true"/>
                             <TextArea id="descriptionArea" value="{maintenance>/newTicket/description}" placeholder="Please describe the issue..." rows="5" growing="true" />
 
-                            <Label text="Evidence" />
+                            <Label text="Evidence" required="true" />
                             <u:FileUploader id="fileUploader" name="myFileUpload" placeholder="Upload photo..." style="Emphasized" icon="sap-icon://attachment-photo"/>
                             
                         </f:content>
